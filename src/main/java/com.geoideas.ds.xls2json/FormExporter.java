@@ -8,9 +8,11 @@ import java.util.function.Function;
 
 public class FormExporter {
     private Form form;
+    private String fileName;
 
-    public FormExporter(Form form) {
+    public FormExporter(Form form, String fileName) {
         this.form = form;
+        this.fileName = fileName;
     }
 
     public String toJson() {
@@ -51,9 +53,13 @@ public class FormExporter {
 
     private JSONObject settingToJson() {
         var settings = form.getSettings().get(0);
+        var id = settings.getFormId();
+        var title = settings.getFormTitle();
+        var formId = id == null || id.isBlank() ? fileName : id;
+        var formTitle = title == null || title.isBlank() ? formId : title;
         return new JSONObject()
-            .put("formId", settings.getFormId())
-            .put("formTitle", settings.getFormTitle())
+            .put("formId", formId)
+            .put("formTitle", formTitle)
             .put("version", settings.getVersion());
     }
 }

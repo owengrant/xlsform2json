@@ -43,8 +43,7 @@ public class Form {
     }
 
     public SettingField addSettingField(SettingField field) {
-        var id = field.getFormId();
-        if(id == null || id.isBlank() || id.equals("null")) return null;
+        if(emptySettingsField(field)) return null;
         settings.add(field);
         return field;
     }
@@ -55,6 +54,23 @@ public class Form {
         form.choices = completeChoices(form);
         form.settings = settings;
         return form;
+    }
+
+    private boolean emptySettingsField(SettingField field) {
+        var id = field.getFormId();
+        var title = field.getFormTitle();
+        var version = field.getVersion();
+        var key = field.getPublicKey();
+        var lang = field.getDefaultLanguage();
+        var url = field.getSubmissionUrl();
+        return isEmpty(id, title, version, key, lang, url);
+    }
+
+    private boolean isEmpty(String... list) {
+        for (var input: list)
+            if(!(input == null || input.isBlank() || input.equals("/null")))
+                return false;
+        return true;
     }
 
     private HashMap<String, SurveyField> completeSurvey() {
