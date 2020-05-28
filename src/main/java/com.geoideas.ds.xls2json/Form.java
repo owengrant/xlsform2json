@@ -93,7 +93,7 @@ public class Form {
             var type = newField.getType().toLowerCase();
             if(type.startsWith("begin")) {
                 groups.add(newField);
-            } else if(type.startsWith("end")) {
+            } else if(type.startsWith("end repeat") || type.startsWith("end group")) {
                 groups.remove();
             }
         }
