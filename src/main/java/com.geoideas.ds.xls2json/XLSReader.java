@@ -30,6 +30,7 @@ public class XLSReader {
     }
 
     private void extractChoiceSheet(XSSFSheet sheet) {
+        if(sheet == null) return;
         var listNameColumn = -1;
         var nameColumn= -1;
         var labelColunm = -1;
