@@ -86,8 +86,7 @@ public class Form {
             newField.setIndex(field.getIndex());
             if(!groups.isEmpty()) {
                 var group = groups.peek();
-                newField.setParent(group.getName())
-                        .setName(newField.getParent()+newField.getName());
+                newField.setName(group.getName()+newField.getName());
             }
             newSurvey.put(newField.getName(), newField);
             var type = newField.getType().toLowerCase();
