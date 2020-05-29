@@ -4,14 +4,13 @@ public class SurveyField {
     private String name;
     private String label;
     private String type;
-    private String originalName;
+    private String parent;
     private int index;
 
     public SurveyField() {
     }
 
     public SurveyField(String name, String label, String type) {
-        this.originalName = name;
         this.name = name;
         this.label = label;
         this.type = type;
@@ -49,12 +48,12 @@ public class SurveyField {
         return this;
     }
 
-    public String getOriginalName() {
-        return originalName;
+    public String getParent() {
+        return parent;
     }
 
-    public SurveyField setOriginalName(String originalName) {
-        this.originalName = originalName;
+    public SurveyField setParent(String parent) {
+        this.parent = parent;
         return this;
     }
 
@@ -73,7 +72,7 @@ public class SurveyField {
         sb.append("name='").append(name).append('\'');
         sb.append(", label='").append(label).append('\'');
         sb.append(", type='").append(type).append('\'');
-        sb.append(", parent='").append(originalName).append('\'');
+        sb.append(", parent='").append(parent).append('\'');
         sb.append(", index=").append(index);
         sb.append('}');
         return sb.toString();

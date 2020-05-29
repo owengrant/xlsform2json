@@ -26,7 +26,7 @@ public class FormExporter {
     private JSONObject surveyToJson() {
         Function<SurveyField, JSONObject> toJson = field ->
             new JSONObject()
-                    .put("originalName", field.getOriginalName())
+                    .put("parent", field.getParent())
                     .put("name", field.getName())
                     .put("type", field.getType().startsWith("select") ? field.getType().split(" ")[0] : field.getType())
                     .put("label", field.getLabel())
