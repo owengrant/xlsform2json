@@ -3,6 +3,7 @@ package com.geoideas.ds.xls2json;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -133,8 +134,8 @@ public class XLSReader {
 
     private String extractCell(Cell cell) {
         if(cell == null) return null;
-        cell.setCellType(CellType.STRING);
-        return cell.getStringCellValue();
+        var formatter = new DataFormatter();
+        return formatter.formatCellValue(cell);
     }
 
 }
