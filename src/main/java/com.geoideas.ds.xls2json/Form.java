@@ -22,7 +22,7 @@ public class Form {
         if(type == null || type.isBlank() || type.equals("/null")) return null;
         field.setIndex(survey.size());
         if(type.toLowerCase().startsWith("end")) {
-            field.setName(type.toLowerCase()+":"+field.getIndex());
+            field.setName("/"+type.toLowerCase()+":"+field.getIndex());
         }
         survey.put(field.getName(), field);
         return field;
@@ -78,7 +78,7 @@ public class Form {
                 .stream()
                 .sorted((f1, f2) -> f1.getIndex() - f2.getIndex())
                 .collect(Collectors.toList());
-        Queue<SurveyField> groups = new LinkedList<>();
+        Stack<SurveyField> groups = new Stack<>();
         var newSurvey = new HashMap<String, SurveyField>();
         for(var i = 0; i < sorted.size(); i++) {
             var field = sorted.get(i);
@@ -92,9 +92,9 @@ public class Form {
             newSurvey.put(newField.getName(), newField);
             var type = newField.getType().toLowerCase();
             if(type.startsWith("begin")) {
-                groups.add(newField);
+                groups.push(newField);
             } else if(type.startsWith("end repeat") || type.startsWith("end group")) {
-                groups.remove();
+                groups.pop();
             }
         }
         return newSurvey;
